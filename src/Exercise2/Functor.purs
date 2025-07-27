@@ -4,6 +4,7 @@ import Prelude
 
 import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
+import Data.Expanded.String ((<\>))
 
 -- # Before
 
@@ -26,12 +27,9 @@ addOneEither (Right x) = Right (x + 1)
 executeBefore :: String
 executeBefore =
   "addOneMaybe (Just 5)': " <> show (addOneMaybe (Just 5))
-    <> ",\naddOneMaybe Nothing: "
-    <> show (addOneMaybe Nothing)
-    <> ",\naddOneEither (Right 10)': "
-    <> show (addOneEither (Right 10))
-    <> ",\naddOneEither (Left \"Error\"): "
-    <> show (addOneEither (Left "Error"))
+  <\> "addOneMaybe Nothing: " <> show (addOneMaybe Nothing)
+  <\> "addOneEither (Right 10)': " <> show (addOneEither (Right 10))
+  <\> "addOneEither (Left \"Error\"): " <> show (addOneEither (Left "Error"))
 
 -- # After
 
@@ -70,17 +68,10 @@ executeAfter =
     leftValue = Left "Error" :: Either String Int
   in
     "addOneMaybe (Just 5)': " <> show (addOneMaybe' maybeValue)
-      <> ",\naddOneMaybe Nothing: "
-      <> show (addOneMaybe' Nothing)
-      <> ",\naddOneEither (Right 10)': "
-      <> show (addOneEither' rightValue)
-      <> ",\naddOneEither (Left \"Error\"): "
-      <> show (addOneEither' leftValue)
-      <> ",\naddOne (Just 5)': "
-      <> show (addOne maybeValue)
-      <> ",\naddOne Nothing: "
-      <> show (addOne Nothing)
-      <> ",\naddOne (Right 10)': "
-      <> show (addOne rightValue)
-      <> ",\naddOne (Left \"Error\"): "
-      <> show (addOne leftValue)
+    <\> "addOneMaybe Nothing: " <> show (addOneMaybe' Nothing)
+    <\> "addOneEither (Right 10)': " <> show (addOneEither' rightValue)
+    <\> "addOneEither (Left \"Error\"): " <> show (addOneEither' leftValue)
+    <\> "addOne (Just 5)': " <> show (addOne maybeValue)
+    <\> "addOne Nothing: " <> show (addOne Nothing)
+    <\> "addOne (Right 10)': " <> show (addOne rightValue)
+    <\> "addOne (Left \"Error\"): " <> show (addOne leftValue)

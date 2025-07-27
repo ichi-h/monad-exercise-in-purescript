@@ -3,6 +3,7 @@ module Exercise3.Applicative (executeBefore, executeAfter) where
 import Prelude
 
 import Data.Maybe (Maybe(..))
+import Data.Expanded.String ((<\>))
 
 -- # Before
 
@@ -20,10 +21,8 @@ addTwoMaybe (Just x) (Just y) = Just (x + y)
 executeBefore :: String
 executeBefore =
   "addTwoMaybe (Just 3) (Just 5): " <> show (addTwoMaybe (Just 3) (Just 5))
-    <> ",\naddTwoMaybe (Just 3) Nothing: "
-    <> show (addTwoMaybe (Just 3) Nothing)
-    <> ",\naddTwoMaybe Nothing (Just 5): "
-    <> show (addTwoMaybe Nothing (Just 5))
+  <\> "addTwoMaybe (Just 3) Nothing: " <> show (addTwoMaybe (Just 3) Nothing)
+  <\> "addTwoMaybe Nothing (Just 5): " <> show (addTwoMaybe Nothing (Just 5))
 
 -- # After
 
@@ -55,11 +54,7 @@ executeAfter =
     maybeValue2 = Just 5 :: Maybe Int
   in
     "addTwoMaybe (Just 3) (Just 5): " <> show (addTwoMaybe' maybeValue1 maybeValue2)
-      <> ",\naddTwoMaybe (Just 3) Nothing: "
-      <> show (addTwoMaybe' maybeValue1 Nothing)
-      <> ",\naddTwoMaybe Nothing (Just 5): "
-      <> show (addTwoMaybe' Nothing maybeValue2)
-      <> ",\naddTwo (Just 3) (Just 5): "
-      <> show (addTwo maybeValue1 maybeValue2)
-      <> ",\naddTwo Nothing (Just 5): "
-      <> show (addTwo Nothing maybeValue2)
+    <\> "addTwoMaybe (Just 3) Nothing: " <> show (addTwoMaybe' maybeValue1 Nothing)
+    <\> "addTwoMaybe Nothing (Just 5): " <> show (addTwoMaybe' Nothing maybeValue2)
+    <\> "addTwo (Just 3) (Just 5): " <> show (addTwo maybeValue1 maybeValue2)
+    <\> "addTwo Nothing (Just 5): " <> show (addTwo Nothing maybeValue2)

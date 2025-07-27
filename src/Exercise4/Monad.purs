@@ -3,6 +3,7 @@ module Exercise4.Monad (executeBefore, executeAfter) where
 import Prelude
 
 import Data.Maybe (Maybe(..))
+import Data.Expanded.String ((<\>))
 
 -- # Before
 
@@ -23,10 +24,8 @@ complexChain (Just x) =
 executeBefore :: String
 executeBefore =
   "complexChain (Just 24): " <> show (complexChain (Just 24))
-    <> ",\ncomplexChain (Just 0): "
-    <> show (complexChain (Just 0))
-    <> ",\ncomplexChain Nothing: "
-    <> show (complexChain Nothing)
+  <\> "complexChain (Just 0): " <> show (complexChain (Just 0))
+  <\> "complexChain Nothing: " <> show (complexChain Nothing)
 
 -- # After
 
@@ -59,13 +58,8 @@ complexChain'' mx = do
 executeAfter :: String
 executeAfter =
   "complexChain' (Just 24): " <> show (complexChain' (Just 24))
-    <> ",\ncomplexChain' (Just 0): "
-    <> show (complexChain' (Just 0))
-    <> ",\ncomplexChain' Nothing: "
-    <> show (complexChain' Nothing)
-    <> ",\ncomplexChain'' (Just 24): "
-    <> show (complexChain'' (Just 24))
-    <> ",\ncomplexChain'' (Just 0): "
-    <> show (complexChain'' (Just 0))
-    <> ",\ncomplexChain'' Nothing: "
-    <> show (complexChain'' Nothing)
+  <\> "complexChain' (Just 0): " <> show (complexChain' (Just 0))
+  <\> "complexChain' Nothing: " <> show (complexChain' Nothing)
+  <\> "complexChain'' (Just 24): " <> show (complexChain'' (Just 24))
+  <\> "complexChain'' (Just 0): " <> show (complexChain'' (Just 0))
+  <\> "complexChain'' Nothing: " <> show (complexChain'' Nothing)
