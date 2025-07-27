@@ -1,0 +1,65 @@
+module Exercise3.Applicative (executeBefore, executeAfter) where
+
+import Prelude
+
+import Data.Maybe (Maybe(..))
+
+-- # Before
+
+addTwoMaybe :: Maybe Int -> Maybe Int -> Maybe Int
+addTwoMaybe Nothing _ = Nothing
+addTwoMaybe _ Nothing = Nothing
+addTwoMaybe (Just x) (Just y) = Just (x + y)
+
+-- addTwoMaybe mx my = case mx of
+--   Nothing -> Nothing
+--   Just x -> case my of
+--     Nothing -> Nothing
+--     Just y -> Just (x + y)
+
+executeBefore :: String
+executeBefore =
+  "addTwoMaybe (Just 3) (Just 5): " <> show (addTwoMaybe (Just 3) (Just 5))
+    <> ",\naddTwoMaybe (Just 3) Nothing: "
+    <> show (addTwoMaybe (Just 3) Nothing)
+    <> ",\naddTwoMaybe Nothing (Just 5): "
+    <> show (addTwoMaybe Nothing (Just 5))
+
+-- # After
+
+-- `<$>` means `map` in infix notation.
+
+-- ```purs
+-- instance applyMaybe :: Apply Maybe where
+--   apply (Just fn) x = fn <$> x
+--   apply Nothing   _ = Nothing
+-- 
+-- instance applicativeMaybe :: Applicative Maybe where
+--   pure = Just
+-- ```
+-- 
+-- see: https://github.com/purescript/purescript-maybe/blob/v3.0.0/src/Data/Maybe.purs#L37-L93
+
+-- `<*>` means `apply` in infix notation.
+
+addTwoMaybe' :: Maybe Int -> Maybe Int -> Maybe Int
+addTwoMaybe' mx my = (\x y -> x + y) <$> mx <*> my
+
+addTwo :: forall f. Applicative f => f Int -> f Int -> f Int
+addTwo fx fy = (\x y -> x + y) <$> fx <*> fy
+
+executeAfter :: String
+executeAfter =
+  let
+    maybeValue1 = Just 3 :: Maybe Int
+    maybeValue2 = Just 5 :: Maybe Int
+  in
+    "addTwoMaybe (Just 3) (Just 5): " <> show (addTwoMaybe' maybeValue1 maybeValue2)
+      <> ",\naddTwoMaybe (Just 3) Nothing: "
+      <> show (addTwoMaybe' maybeValue1 Nothing)
+      <> ",\naddTwoMaybe Nothing (Just 5): "
+      <> show (addTwoMaybe' Nothing maybeValue2)
+      <> ",\naddTwo (Just 3) (Just 5): "
+      <> show (addTwo maybeValue1 maybeValue2)
+      <> ",\naddTwo Nothing (Just 5): "
+      <> show (addTwo Nothing maybeValue2)
