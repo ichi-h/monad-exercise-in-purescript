@@ -46,7 +46,7 @@ complexChain' mx =
   mx >>= \x ->
     safeDivide x 2 >>= \y ->
       safeDivide y 3 >>= \z ->
-        Just (z + 1)
+        pure (z + 1)
 
 complexChain'' :: Maybe Int -> Maybe Int
 complexChain'' mx = do
