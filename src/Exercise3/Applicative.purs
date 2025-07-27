@@ -54,7 +54,7 @@ executeAfter =
     maybeValue2 = Just 5 :: Maybe Int
   in
     "addTwoMaybe (Just 3) (Just 5): " <> show (addTwoMaybe' maybeValue1 maybeValue2)
-    <\> "addTwoMaybe (Just 3) Nothing: " <> show (addTwoMaybe' maybeValue1 Nothing)
-    <\> "addTwoMaybe Nothing (Just 5): " <> show (addTwoMaybe' Nothing maybeValue2)
+    <\> "addTwoMaybe' (Just 3) Nothing: " <> show (addTwoMaybe' maybeValue1 Nothing)
+    <\> "addTwoMaybe' Nothing (Just 5): " <> show (addTwoMaybe' Nothing maybeValue2)
     <\> "addTwo (Just 3) (Just 5): " <> show (addTwo maybeValue1 maybeValue2)
     <\> "addTwo Nothing (Just 5): " <> show (addTwo Nothing maybeValue2)
