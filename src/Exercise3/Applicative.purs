@@ -2,8 +2,9 @@ module Exercise3.Applicative (executeBefore, executeAfter) where
 
 import Prelude
 
-import Data.Maybe (Maybe(..))
+import Control.Apply (lift2)
 import Data.Expanded.String ((<\>))
+import Data.Maybe (Maybe(..))
 
 -- # Before
 
@@ -44,8 +45,8 @@ executeBefore =
 addTwoMaybe' :: Maybe Int -> Maybe Int -> Maybe Int
 addTwoMaybe' mx my = (\x y -> x + y) <$> mx <*> my
 
-addTwo :: forall f. Applicative f => f Int -> f Int -> f Int
-addTwo fx fy = (\x y -> x + y) <$> fx <*> fy
+addTwo :: forall f a. Applicative f => Semiring a => f a -> f a -> f a
+addTwo = lift2 (\x y -> x + y)
 
 executeAfter :: String
 executeAfter =
