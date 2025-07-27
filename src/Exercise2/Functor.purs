@@ -67,11 +67,11 @@ executeAfter =
     rightValue = Right 10 :: Either String Int
     leftValue = Left "Error" :: Either String Int
   in
-    "addOneMaybe (Just 5)': " <> show (addOneMaybe' maybeValue)
-    <\> "addOneMaybe Nothing: " <> show (addOneMaybe' Nothing)
-    <\> "addOneEither (Right 10)': " <> show (addOneEither' rightValue)
-    <\> "addOneEither (Left \"Error\"): " <> show (addOneEither' leftValue)
-    <\> "addOne (Just 5)': " <> show (addOne maybeValue)
+    "addOneMaybe' (Just 5): " <> show (addOneMaybe' maybeValue)
+    <\> "addOneMaybe' Nothing: " <> show (addOneMaybe' Nothing)
+    <\> "addOneEither' (Right 10): " <> show (addOneEither' rightValue)
+    <\> "addOneEither' (Left \"Error\"): " <> show (addOneEither' leftValue)
+    <\> "addOne (Just 5): " <> show (addOne maybeValue)
     <\> "addOne Nothing: " <> show (addOne Nothing)
-    <\> "addOne (Right 10)': " <> show (addOne rightValue)
+    <\> "addOne (Right 10): " <> show (addOne rightValue)
     <\> "addOne (Left \"Error\"): " <> show (addOne leftValue)
