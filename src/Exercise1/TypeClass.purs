@@ -2,29 +2,26 @@ module Exercise1.TypeClass where
 
 import Prelude
 
-newtype DateRange = DateRange
-  { startDate :: String
-  , endDate :: String
-  }
+newtype Person = Person { name :: String, age :: Int }
 
-instance eqDateRange :: Eq DateRange where
-  eq (DateRange dateRange1) (DateRange dateRange2) =
-    dateRange1.startDate == dateRange2.startDate && dateRange1.endDate == dateRange2.endDate
+instance eqPerson :: Eq Person where
+  eq (Person { name: name1, age: age1 }) (Person { name: name2, age: age2 }) =
+    name1 == name2 && age1 == age2
 
-instance showDateRange :: Show DateRange where
-  show (DateRange dateRange) =
-    "DateRange { startDate: " <> dateRange.startDate <> ", endDate: " <> dateRange.endDate <> " }"
+instance showPerson :: Show Person where
+  show (Person { name: name, age: age }) =
+    "Person { name: " <> name <> ", age: " <> show age <> " }"
 
 execute :: String
 execute =
   let
-    dateRange1 = DateRange { startDate: "2023-01-01", endDate: "2023-01-31" }
-    dateRange2 = DateRange { startDate: "2023-01-01", endDate: "2023-01-31" }
-    dateRange3 = DateRange { startDate: "2023-02-01", endDate: "2023-02-28" }
+    person1 = Person { name: "Alice", age: 30 }
+    person2 = Person { name: "Alice", age: 30 }
+    person3 = Person { name: "Bob", age: 25 }
   in
-    if dateRange1 == dateRange2 then
-      "dateRange1 is equal to dateRange2: " <> show dateRange1
-    else if dateRange1 == dateRange3 then
-      "dateRange1 is equal to dateRange3: " <> show dateRange1
+    if person1 == person2 then
+      "person1 is equal to person2: " <> show person1
+    else if person1 == person3 then
+      "person1 is equal to person3: " <> show person1
     else
       "No equality found"
